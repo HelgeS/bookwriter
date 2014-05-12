@@ -1,7 +1,7 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
 one:
-  title: MyString
+  title: MyString1
   edition: 1
   published: 2014-05-12
   genre: MyString
@@ -9,7 +9,7 @@ one:
   tags: MyString
 
 two:
-  title: MyString
+  title: MyString2
   edition: 1
   published: 2014-05-12
   genre: MyString

@@ -12,20 +12,20 @@
     <th></th>
   </tr>
 
-<% @chunks.each do |chunk| %>
-  <tr>
-    <td><%= chunk.title %></td>
-    <td><%= chunk.section %></td>
-    <td><%= chunk.content %></td>
-    <td><%= chunk.user %></td>
-    <td><%= chunk.book %></td>
-    <td><%= link_to 'Show', chunk %></td>
-    <td><%= link_to 'Edit', edit_chunk_path(chunk) %></td>
-    <td><%= link_to 'Destroy', chunk, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-  </tr>
-<% end %>
+  <% @chunks.each do |chunk| %>
+      <tr>
+        <td><%= chunk.title %></td>
+        <td><%= chunk.section %></td>
+        <td><%= chunk.content %></td>
+        <td><%= chunk.user %></td>
+        <td><%= chunk.book %></td>
+        <td><%= link_to 'Show', book_chunks_path(chunk.book.id) %></td>
+        <td><%= link_to 'Edit', edit_book_chunk_path(chunk.book.id, chunk) %></td>
+        <td><%= link_to 'Destroy', book_chunk_path(chunk.book.id, chunk), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+  <% end %>
 </table>
 
 <br />
 
-<%= link_to 'New Chunk', new_chunk_path %>
+<%= link_to 'New Chunk', new_book_chunk_path %>

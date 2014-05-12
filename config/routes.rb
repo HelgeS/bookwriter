@@ -9,5 +9,9 @@ Bookwriter::Application.routes.draw do
     resources :chunks
   end
 
-  devise_for :users
+  devise_for :users, :path => 'accounts'
+
+  #resources :users
+
+
 end

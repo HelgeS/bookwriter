@@ -4,12 +4,12 @@ one:
   title: MyString
   section: MyString
   content: MyText
-  user: 
-  book: 
+  user: one
+  book: one
 
 two:
   title: MyString
   section: MyString
   content: MyText
-  user: 
-  book: 
+  user: two
+  book: two
