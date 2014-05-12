@@ -139,7 +139,7 @@ DEPENDENCIES
   devise
   jquery-rails
   paper_trail (~> 2)
-  paperclip (~> 3.0)
+  paperclip (~> 3.5.4)
   pg
   rails (= 3.2.17)
   sass-rails (~> 3.2.3)
