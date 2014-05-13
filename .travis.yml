@@ -9,19 +9,17 @@ script:
 - RAILS_ENV=test bundle exec rake db:migrate --trace
 - bundle exec rake db:test:prepare
 - bundle exec rake
-
 before_deploy:
 - cp config/database.openshift.yml config/database.yml
-
 deploy:
   provider: openshift
   user: helge.spieker@smail.inf.h-brs.de
   password:
-    secure: SOUrarjMyVFW2cRQW2+gBdwfHazezl4bmciesWjF6xn0Onaug+ZgbEGB4VZ9xDYQ8cm0d3m9ROy07pKu6jE280Xucnqb9TBhz/Ne5LIcogxy9Ewr3Pc2g3OMZtihc0msqLf0vJuz7W7MGSq/zJtcUer4Z+iVFgJOdSqRl3xv5Cc=
-  domain: bookwriter
+    secure: Lqfo92x8F2xajELJQdSBfv5dwuuSiOYfRgvh8pEFDbWqBMGwLHuqX3IprTUqX8j9Z5GHXnrdSpNF54smR1cvLwxdaWaRa5U7xMGEdzwcduDf12gcT5bBvTYMs5sepkmsVSehFC3Ck0S9e07ZgZRExtEbsFopViYdcwtUsTrQIFU=
   app:
     master: stable
     development: testing
+  domain: bookwriter
   on:
-    repo: team-sb/bookwriter
     rvm: 1.9.3
+    repo: team-sb/bookwriter
