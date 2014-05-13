@@ -15,4 +15,4 @@
 //= require jquery.ui.all
 //= require_tree .
 //= require ckeditor/init
-//= require jstree
+//= require fancytree
