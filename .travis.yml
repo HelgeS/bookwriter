@@ -2,7 +2,6 @@ language: ruby
 rvm:
 - 1.9.3
 - 2.1
-- ruby-head
 before_script:
 - psql -c 'create database travis_ci_test;' -U postgres
 - cp config/database.travis.yml config/database.yml
