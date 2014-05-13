@@ -11,7 +11,6 @@ Bookwriter::Application.routes.draw do
 
   devise_for :users, :path => 'accounts'
 
+  #resource :user
   #resources :users
-
-
 end
