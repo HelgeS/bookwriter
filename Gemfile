@@ -9,6 +9,7 @@ gem 'devise' # Benutzermanagement
 gem 'paper_trail', '~> 2' # Wird von Paperclip (s.u.) benötigt
 gem 'paperclip', '~> 3.5.4' # Versionierung
 gem 'ckeditor' # WYSIWYG-Editor
+gem 'acts_as_list'
 
 # Gems used only for assets and not required
 # in production environments by default.

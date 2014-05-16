@@ -1,11 +1,12 @@
 class Chunk < ActiveRecord::Base
-  attr_accessible :content, :section, :title, :user_id, :original_updated_at
+  attr_accessible :content, :section, :title, :user_id, :position, :original_updated_at
   attr_writer :original_updated_at
   belongs_to :user
   belongs_to :book
+  acts_as_list :scope => :book
   validate :handle_conflict, only: :update
+  before_save :set_position
 
-  # Versionierung durch Paper trail
   has_paper_trail
 
   def username
@@ -33,6 +34,12 @@ class Chunk < ActiveRecord::Base
           self.content << values.last
         end
       end
+    end
+  end
+
+  def set_position
+    if self.position.nil?
+      self.move_to_bottom
     end
   end
 end

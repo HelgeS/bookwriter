@@ -1,16 +1,17 @@
 Bookwriter::Application.routes.draw do
   mount Ckeditor::Engine => '/ckeditor'
 
-  # Startseite der Applikation
   root :to => 'books#index'
 
-  # verschachtelte Ressourcen
+  get 'books/treeview', to: 'books#treeview', as:'books_treeview'
+
   resources :books do
-    resources :chunks
+    get :treeview
+
+    resources :chunks do
+      put :position
+    end
   end
 
   devise_for :users, :path => 'accounts'
-
-  #resource :user
-  #resources :users
 end

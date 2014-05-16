@@ -71,7 +71,20 @@ class ChunksController < ApplicationController
       else
         format.html { render action: "edit" }
         format.json { render json: @chunk.errors, status: :unprocessable_entity }
-      end
+     end
+    end
+  end
+
+  # PUT /chunks/1/position
+  # PUT /chunks/1/position.json
+  def position
+    @chunk = Chunk.find(params[:chunk_id])
+    @chunk.set_list_position(params[:chunk][:position])
+    @chunk.save
+
+    respond_to do |format|
+      format.html { redirect_to @book }
+      format.json { head :no_content }
     end
   end
 

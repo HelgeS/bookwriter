@@ -14,6 +14,41 @@ class BooksController < ApplicationController
     end
   end
 
+  def treeview
+    @books = current_user.books
+
+    tree_objects = Array.new
+    @books.each do |b|
+      children = Array.new
+
+      b.chunks.order("position ASC").each do |c|
+        tree_chunk = {
+            title: c.title,
+            key: c.id,
+            href: edit_book_chunk_path(b, c),
+            position_url: book_chunk_position_path(b, c, "json")
+        }
+        children.push tree_chunk
+      end
+
+      tree_book = {
+        title: "#{b.title} (#{b.edition})",
+        key: b.id,
+        folder: true,
+        href: book_path(b),
+        expanded: (params[:book_id].to_i == b.id),
+        children: children
+      }
+
+      tree_objects.append(tree_book)
+    end
+
+    respond_to do |format|
+      format.html { render action: "index" }
+      format.json { render json: tree_objects }
+    end
+  end
+
   # GET /books/1
   # GET /books/1.json
   def show

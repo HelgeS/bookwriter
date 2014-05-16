@@ -28,6 +28,8 @@ GEM
     activesupport (3.2.17)
       i18n (~> 0.6, >= 0.6.4)
       multi_json (~> 1.0)
+    acts_as_list (0.4.0)
+      activerecord (>= 3.0)
     arel (3.0.3)
     bcrypt (3.1.7)
     builder (3.0.4)
@@ -138,6 +140,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  acts_as_list
   ckeditor
   coffee-rails (~> 3.2.1)
   devise

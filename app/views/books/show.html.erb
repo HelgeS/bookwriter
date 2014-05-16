@@ -40,7 +40,7 @@
       </tr>
     </thead>
     <tbody>
-    <% @book.chunks.each do |chunk| %>
+    <% @book.chunks.sort_by {|obj| obj.position }.each do |chunk| %>
       <tr>
         <td><%= chunk.title %></td>
         <td><%= chunk.section %></td>

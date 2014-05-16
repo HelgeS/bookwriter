@@ -1,13 +1,3 @@
-<div id="books_tree">
-  <ul id="treeData" style="display: none;">
-    <% books.each do |book| %>
-      <li id="book<%= book.id %>" class="book" data-folder="true"<% if book.id == @book.id %> data-expanded="true"<% end %>><%= link_to "#{book.title} (#{book.edition})", book %>
-        <ul>
-        <% book.chunks.sort_by {|obj| obj.section }.each do |chunk| %>
-          <li id="chunk<%= chunk.id %>" class="chunk"><%= link_to chunk.title, edit_book_chunk_path(book, chunk) %></li>
-        <% end %>
-        </ul>
-      </li>
-    <% end %>
-  </ul>
+<div id="books_tree" data-url="<% if @book.nil? %><%= books_treeview_path "json" %><% else %><%= book_treeview_path @book, "json" %><% end %>">
+
 </div>

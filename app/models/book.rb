@@ -3,7 +3,7 @@ class Book < ActiveRecord::Base
   before_destroy :destroy_chunks
 
   has_and_belongs_to_many :users
-  has_many :chunks
+  has_many :chunks, :order => 'position'
 
   def has_chunks?
     !chunks.empty?
