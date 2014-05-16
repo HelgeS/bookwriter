@@ -9,6 +9,7 @@ gem 'devise' # Benutzermanagement
 gem 'paper_trail', '~> 2' # Wird von Paperclip (s.u.) benötigt
 gem 'paperclip', '~> 3.5.4' # Versionierung
 gem 'ckeditor' # WYSIWYG-Editor
+#gem 'ckeditor_rails' # Integration in asset pipeline
 gem 'acts_as_list'
 
 # Gems used only for assets and not required
@@ -21,10 +22,13 @@ group :assets do
   gem 'therubyracer', :platforms => :ruby
 
   gem 'uglifier', '>= 1.0.3'
+
+  gem 'yui-compressor', '0.11'
 end
 
 group :test do
   gem "minitest", "4.7.5"
+  gem "minitest-reporters"
   gem "test-unit"
 end
 
