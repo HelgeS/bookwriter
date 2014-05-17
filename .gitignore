@@ -46,3 +46,7 @@ config/database.yml
 /.idea/dataSources.xml
 /.idea/dataSources.ids
 .DS_Store
+.idea/runConfigurations/Development__bookwriter.xml
+.idea/runConfigurations/Production__bookwriter.xml
+.idea/runConfigurations/spec__bookwriter.xml
+.idea/runConfigurations/test__bookwriter.xml
