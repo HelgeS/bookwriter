@@ -23,6 +23,18 @@
   <%= @book.tags %>
 </p>
 
+<p>
+  <%= link_to 'Als PDF exportieren', book_export_path(@book, 'pdf'), :remote => true %>
+</p>
+
+<p>
+  <%= link_to 'Als gesamtes Dokument anzeigen', book_export_path(@book, 'html'), :remote => true %>
+</p>
+
+<p>
+  <%= link_to 'Als ePub exportieren', book_export_path(@book, 'epub'), :remote => true %>
+</p>
+
 <br/>
 
 <h2>Chunks</h2>

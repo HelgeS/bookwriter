@@ -122,7 +122,7 @@ class BooksController < ApplicationController
     end
   end
 
-  # GET /books/1/export/:format
+  # GET /books/1/export/:type(.:format)
   def export
     @book = Book.find(params[:book_id])
 
@@ -130,7 +130,8 @@ class BooksController < ApplicationController
       format.html { render layout: false }
       format.json { head :no_content }
       format.pdf do
-        render :pdf => "#{@book.title} (#{@book.edition})"
+        render :pdf => "#{@book.title} (#{@book.edition}. Edition)",
+               :footer => { :right => 'Seite [page] von [topage]' }
       end
     end
   end
