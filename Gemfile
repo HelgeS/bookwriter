@@ -15,6 +15,7 @@ gem 'acts_as_list'
 # PDF-Creation
 gem 'wkhtmltopdf-binary' # Commandline tool for pdf creation
 gem 'wicked_pdf' # gem to control above tool; could be switch to 'pdfkit'
+gem 'kitabu' # ePub/Mobi export
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -31,9 +32,9 @@ group :assets do
 end
 
 group :test do
-  gem "minitest", "4.7.5"
-  gem "minitest-reporters"
-  gem "test-unit"
+  gem 'minitest', '4.7.5'
+  gem 'minitest-reporters'
+  gem 'test-unit'
 end
 
 gem 'jquery-rails'
