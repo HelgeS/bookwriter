@@ -122,6 +122,19 @@ class BooksController < ApplicationController
     end
   end
 
+  # GET /books/1/export/:format
+  def export
+    @book = Book.find(params[:book_id])
+
+    respond_to do |format|
+      format.html { render layout: false }
+      format.json { head :no_content }
+      format.pdf do
+        render :pdf => "#{@book.title} (#{@book.edition})"
+      end
+    end
+  end
+
   private
   def find_all_users
     @users = User.all

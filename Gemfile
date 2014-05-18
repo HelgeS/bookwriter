@@ -12,6 +12,10 @@ gem 'ckeditor' # WYSIWYG-Editor
 #gem 'ckeditor_rails' # Integration in asset pipeline
 gem 'acts_as_list'
 
+# PDF-Creation
+gem 'wkhtmltopdf-binary' # Commandline tool for pdf creation
+gem 'wicked_pdf' # gem to control above tool; could be switch to 'pdfkit'
+
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
