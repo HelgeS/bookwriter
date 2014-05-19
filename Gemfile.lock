@@ -71,6 +71,8 @@ GEM
     jquery-ui-rails (4.2.1)
       railties (>= 3.2.16)
     json (1.8.1)
+    kindlegen (2.9.0)
+      systemu
     kitabu (1.0.6)
       RedCloth
       activesupport
@@ -152,6 +154,7 @@ GEM
       rack (~> 1.0)
       tilt (~> 1.1, != 1.3.0)
     sqlite3 (1.3.9)
+    systemu (2.6.4)
     test-unit (2.5.5)
     therubyracer (0.12.1)
       libv8 (~> 3.16.14.0)
@@ -185,6 +188,7 @@ DEPENDENCIES
   devise
   jquery-rails
   jquery-ui-rails
+  kindlegen
   kitabu
   minitest (= 4.7.5)
   minitest-reporters

@@ -133,7 +133,34 @@ class BooksController < ApplicationController
         render :pdf => "#{@book.title} (#{@book.edition}. Edition)",
                :footer => { :right => 'Seite [page] von [topage]' }
       end
+      format.epub do
+        send_file export_ebook('epub'), :x_sendfile => true
+      end
+      format.mobi do
+        send_file export_ebook('mobi'), :x_sendfile => true
+      end
     end
+  end
+
+  private
+  def export_ebook type
+    config = render_to_string 'config'
+    logger.debug config
+    tmp_dir = "tmp/export/%d/book" % (rand*10e12).to_i
+    logger.debug tmp_dir
+    logger.debug `kitabu new #{tmp_dir}`
+
+    File.open(tmp_dir + '/config/kitabu.yml', 'w') { |file| file.write(config) }
+    File.delete(tmp_dir + '/text/01_Welcome.md')
+
+    @book.chunks.order('position ASC').each do |c|
+      filename = "%02d_#{c.title}.html" % (c.position)
+      File.open(tmp_dir + "/text/#{filename}", 'w') { |file| file.write(c.content.html_safe)}
+    end
+
+    `cd #{tmp_dir} && kitabu export`
+
+    tmp_dir + '/output/book.' + type
   end
 
   private
