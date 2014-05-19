@@ -192,6 +192,7 @@ DEPENDENCIES
   kitabu
   minitest (= 4.7.5)
   minitest-reporters
+  nokogiri
   paper_trail (~> 2)
   paperclip (~> 3.5.4)
   pg

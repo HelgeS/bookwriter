@@ -146,7 +146,7 @@ class BooksController < ApplicationController
   def export_ebook type
     config = render_to_string 'config'
     logger.debug config
-    tmp_dir = "tmp/export/%d/book" % (rand*10e12).to_i
+    tmp_dir = 'tmp/export/%d/book' % (rand*10e12).to_i
     logger.debug tmp_dir
     logger.debug `kitabu new #{tmp_dir}`
 
@@ -155,7 +155,16 @@ class BooksController < ApplicationController
 
     @book.chunks.order('position ASC').each do |c|
       filename = "%02d_#{c.title}.html" % (c.position)
-      File.open(tmp_dir + "/text/#{filename}", 'w') { |file| file.write(c.content.html_safe)}
+      File.open(tmp_dir + "/text/#{filename}", 'w') { |file| file.write(c.content.html_safe) }
+
+      c.get_images.each do |img|
+        source = Pathname.new(img)
+        target_path = tmp_dir + '/images/' + source.basename.to_s
+
+        File.open(target_path, 'wb') do |target|
+          open(img) { |source_file| target.write(source_file.read) }
+        end
+      end
     end
 
     `cd #{tmp_dir} && kitabu export`
