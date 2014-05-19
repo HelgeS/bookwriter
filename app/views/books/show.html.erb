@@ -58,11 +58,7 @@
 <% end %>
 <%= button_to 'New Chunk', new_book_chunk_path(@book), method: :get %>
 <br/>
-
-<%= javascript_tag do -%>
-  $(function() {
-    initSortableTable();
-  });
-<% end -%>
+<%= link_to 'Neuladen Baumansicht', '#', data: {'reload-treeview' => true}, remote: true %>
+<br/>
 
 <%= link_to 'Back', books_path %>
