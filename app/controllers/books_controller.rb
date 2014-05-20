@@ -152,6 +152,8 @@ class BooksController < ApplicationController
 
     File.open(tmp_dir + '/config/kitabu.yml', 'w') { |file| file.write(config) }
     File.delete(tmp_dir + '/text/01_Welcome.md')
+    File.delete(tmp_dir + '/templates/epub/cover.png')
+    FileUtils.copy_file(tmp_dir + '/templates/epub/user.css', tmp_dir + '/templates/epub/epub.css')
 
     @book.chunks.order('position ASC').each do |c|
       filename = "%02d_#{c.title}.html" % (c.position)
