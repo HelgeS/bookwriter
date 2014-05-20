@@ -54,4 +54,16 @@ class BooksControllerTest < ActionController::TestCase
 
     assert_redirected_to books_path
   end
+
+  test "should export book as epub" do
+    sign_in :user, @user
+    get :export, book_id: @book, format: 'epub'
+    assert_response :success
+  end
+
+  test "should export book as pdf" do
+    sign_in :user, @user
+    get :export, book_id: @book, format: 'pdf'
+    assert_response :success
+  end
 end

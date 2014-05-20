@@ -136,14 +136,12 @@ class BooksController < ApplicationController
       format.epub do
         send_file export_ebook('epub'), :x_sendfile => true
       end
-      format.mobi do
-        send_file export_ebook('mobi'), :x_sendfile => true
-      end
     end
   end
 
   private
   def export_ebook type
+    logger.debug @book.users
     config = render_to_string 'config'
     logger.debug config
     tmp_dir = 'tmp/export/%d/book' % (rand*10e12).to_i

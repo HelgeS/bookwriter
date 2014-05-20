@@ -16,7 +16,6 @@ gem 'acts_as_list'
 gem 'wkhtmltopdf-binary' # Commandline tool for pdf creation
 gem 'wicked_pdf' # gem to control above tool; could be switch to 'pdfkit'
 gem 'kitabu' # ePub/Mobi export
-gem 'kindlegen'
 gem 'nokogiri'
 
 # Gems used only for assets and not required

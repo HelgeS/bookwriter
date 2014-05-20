@@ -7,6 +7,9 @@ one:
   genre: MyString
   abstract: MyString
   tags: MyString
+  users:
+    - one
+    - two
 
 two:
   title: MyString2
@@ -15,3 +18,4 @@ two:
   genre: MyString
   abstract: MyString
   tags: MyString
+  users: two
