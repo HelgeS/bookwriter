@@ -1,0 +1,37 @@
+# The book's title. Will be used everywhere!
+title: "<%= @book.title %>"
+
+# The book's language.
+language: de
+
+copyright: "Copyright (C) 2014 <%= @book.users.first.full_name %>."
+
+# Who's publishing this book.
+publisher: "<%= @book.users.first.full_name %>"
+
+# When this book was published.
+published_at: "<%= Date.today.to_s('Y-m-d') %>"
+
+# Some book description.
+subject: "<%= @book.abstract %>"
+
+# Some keywords that identify this book.
+keywords: "<%= @book.tags %>"
+
+# Some unique identification. Works great with your domain
+# like `http://yourbook.example.com`.
+uid: "c74e34b1d8249e0762f489f4eefb710e"
+
+# Your book identification like ISBN or ISSN.
+identifier:
+  id: "http://yourbook.example.com"
+  type: "URL" # can be ISBN, ISSN or URL
+
+# This book authors.
+authors:
+<% @book.users.each do |u| %>
+  - "<%= u.full_name %>"
+<% end %>
+
+# The base URL from your source code.
+base_url: http://example.com

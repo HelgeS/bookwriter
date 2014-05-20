@@ -122,7 +122,7 @@ class BooksController < ApplicationController
     end
   end
 
-  # GET /books/1/export/:format
+  # GET /books/1/export/:type(.:format)
   def export
     @book = Book.find(params[:book_id])
 
@@ -130,9 +130,43 @@ class BooksController < ApplicationController
       format.html { render layout: false }
       format.json { head :no_content }
       format.pdf do
-        render :pdf => "#{@book.title} (#{@book.edition})"
+        render :pdf => "#{@book.title} (#{@book.edition}. Edition)",
+               :footer => { :right => 'Seite [page] von [topage]' }
+      end
+      format.epub do
+        send_file export_ebook('epub'), :x_sendfile => true
       end
     end
+  end
+
+  private
+  def export_ebook type
+    config = render_to_string 'config'
+    tmp_dir = 'tmp/export/%d/book' % (rand*10e12).to_i
+    `kitabu new #{tmp_dir}`
+
+    File.open(tmp_dir + '/config/kitabu.yml', 'w') { |file| file.write(config) }
+    File.delete(tmp_dir + '/text/01_Welcome.md')
+    File.delete(tmp_dir + '/templates/epub/cover.png')
+    FileUtils.copy_file(tmp_dir + '/templates/epub/user.css', tmp_dir + '/templates/epub/epub.css')
+
+    @book.chunks.order('position ASC').each do |c|
+      filename = "%02d_#{c.title}.html" % (c.position)
+      File.open(tmp_dir + "/text/#{filename}", 'w') { |file| file.write(c.content.html_safe) }
+
+      c.get_images.each do |img|
+        source = Pathname.new(img)
+        target_path = tmp_dir + '/images/' + source.basename.to_s
+
+        File.open(target_path, 'wb') do |target|
+          open(img) { |source_file| target.write(source_file.read) }
+        end
+      end
+    end
+
+    `cd #{tmp_dir} && kitabu export`
+
+    tmp_dir + '/output/book.' + type
   end
 
   private
