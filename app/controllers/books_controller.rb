@@ -141,12 +141,9 @@ class BooksController < ApplicationController
 
   private
   def export_ebook type
-    logger.debug @book.users
     config = render_to_string 'config'
-    logger.debug config
     tmp_dir = 'tmp/export/%d/book' % (rand*10e12).to_i
-    logger.debug tmp_dir
-    logger.debug `kitabu new #{tmp_dir}`
+    `kitabu new #{tmp_dir}`
 
     File.open(tmp_dir + '/config/kitabu.yml', 'w') { |file| file.write(config) }
     File.delete(tmp_dir + '/text/01_Welcome.md')
