@@ -1,5 +1,6 @@
 class Chunk < ActiveRecord::Base
   attr_accessible :content, :section, :title, :user_id, :position, :original_updated_at
+  attr_accessor :username
   attr_writer :original_updated_at
   belongs_to :user
   belongs_to :book
@@ -10,7 +11,7 @@ class Chunk < ActiveRecord::Base
   has_paper_trail
 
   def username
-    user.email
+    user.full_name if user_id
   end
 
   def get_images

@@ -4,6 +4,7 @@ Bookwriter::Application.routes.draw do
   root :to => 'books#index'
 
   get 'books/treeview', to: 'books#treeview', as: :books_treeview
+  get 'autocomplete/users'
 
   resources :books do
     get :treeview

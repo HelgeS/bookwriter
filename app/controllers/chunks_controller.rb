@@ -64,6 +64,8 @@ class ChunksController < ApplicationController
   def update
     @chunk = Chunk.find(params[:id])
 
+    params[:chunk].delete(:username)
+
     respond_to do |format|
       if @chunk.update_attributes(params[:chunk])
         format.html { redirect_to @book, notice: 'Chunk was successfully updated.' }
@@ -98,6 +100,19 @@ class ChunksController < ApplicationController
       format.html { redirect_to @book }
       format.json { head :no_content }
     end
+  end
+
+  def username=(name)
+    user= User.find_by_name(name)
+    if user
+      self.user_id = user.id
+    else
+      errors[:username] << "Invalid name entered"
+    end
+  end
+
+  def username
+    User.find(user_id).name if user_id
   end
 
   private
