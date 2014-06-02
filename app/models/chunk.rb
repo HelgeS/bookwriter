@@ -13,6 +13,16 @@ class Chunk < ActiveRecord::Base
     user.email
   end
 
+  def get_images
+    images = Array.new
+
+    Nokogiri::HTML(self.content).css('img').each do |img|
+      images.append img.attribute('src').content
+    end
+
+    images
+  end
+
   def original_updated_at
     @original_updated_at || updated_at.to_f
   end

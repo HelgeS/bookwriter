@@ -6,7 +6,7 @@ initSortableTable = function() {
         return ui;
     };
 
-    $("#sortable tbody").sortable({
+    $("#sortable").find("tbody").sortable({
         helper: fixHelper
     }).disableSelection();
 };

@@ -7,7 +7,7 @@ Bookwriter::Application.routes.draw do
 
   resources :books do
     get :treeview
-    get 'export/:type', to: 'books#export', as: :export
+    get :export
 
     resources :chunks do
       put :position
