@@ -12,4 +12,6 @@
  *= require_tree .
  *= require jquery.ui.all
  *= require fancytree/ui.fancytree.min
+ *= require bootstrap/bootstrap.min
+ *= require bootstrap/bootstrap-theme.min
  */

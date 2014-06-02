@@ -16,3 +16,4 @@
 //= require_tree .
 //= require ckeditor/init
 //= require fancytree
+//= require bootstrap.min
