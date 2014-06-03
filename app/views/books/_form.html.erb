@@ -37,12 +37,8 @@
   </div>
   <div class="field">
     <%= f.label :users %><br/>
-    <% @users.each do |user| %>
-      <div>
-        <%= check_box_tag "book[user_ids][]", user.id, @book.users.include?(user) %>
-        <%= user.email %>
-      </div>
-    <% end %>
+    <%= f.text_field :usernames %>
+    <%= f.hidden_field :user_ids %>
   </div>
   <div class="actions">
     <%= f.submit %>
