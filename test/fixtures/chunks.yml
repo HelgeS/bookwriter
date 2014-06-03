@@ -1,15 +1,24 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
 one:
-  title: MyString
-  section: MyString
-  content: MyText
+  title: MyString1
+  section: MyString1
+  content: MyText1
   user: one
   book: one
+  position: 1
 
 two:
-  title: MyString
-  section: MyString
-  content: MyText
+  title: MyString2
+  section: MyString2
+  content: MyText2
   user: two
   book: two
+
+three:
+  title: MyString3
+  section: MyString3
+  content: MyText3
+  user: one
+  book: one
+  position: 2
