@@ -51,16 +51,30 @@ $(function () {
                     contentType: "application/json",
                     data: JSON.stringify({chunk:{position:data.otherNode.getIndex()+1}, _method:'put'}),
                     context: data
-                }); /*.done(function (msg) {
-                    $.get(this.node.parent.data.href, { 'render_template': false }, function (new_data) {
-                        $("div#content").html(new_data);
-                    });
-                });*/
+                });
             }
         },
         click: function(event, data) {
-
             window.location = data.node.data.href;
         }
     });
+    /* This is jquery-ui-contextmenu from https://github.com/mar10/jquery-ui-contextmenu */
+    $("div#books_tree").contextmenu({
+        delegate: "span.fancytree-title",
+        menu: [
+            {title: "Neu", cmd: "add", uiIcon: "ui-icon-plus"},
+            {title: "L&ouml;schen", cmd: "delete", uiIcon: "ui-icon-trash"},
+            {title: "Exportieren", cmd: "export", uiIcon: "ui-icon-arrowthickstop-1-s"}
+        ],
+        beforeOpen: function(event, ui) {
+            var node = $.ui.fancytree.getNode(ui.target);
+//                node.setFocus();
+            node.setActive();
+        },
+        select: function(event, ui) {
+            var node = $.ui.fancytree.getNode(ui.target);
+            alert("select " + ui.cmd + " on " + node);
+        }
+    });
+
 });
