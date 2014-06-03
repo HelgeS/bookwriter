@@ -26,7 +26,8 @@ class BooksController < ApplicationController
             title: c.title,
             key: c.id,
             href: edit_book_chunk_path(b, c),
-            position_url: book_chunk_position_path(b, c, "json")
+            position_url: book_chunk_position_path(b, c, "json"),
+            base_url: book_chunk_path(b, c)
         }
         children.push tree_chunk
       end

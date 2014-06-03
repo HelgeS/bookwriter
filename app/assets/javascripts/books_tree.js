@@ -62,18 +62,29 @@ $(function () {
     $("div#books_tree").contextmenu({
         delegate: "span.fancytree-title",
         menu: [
-            {title: "Neu", cmd: "add", uiIcon: "ui-icon-plus"},
-            {title: "L&ouml;schen", cmd: "delete", uiIcon: "ui-icon-trash"},
-            {title: "Exportieren", cmd: "export", uiIcon: "ui-icon-arrowthickstop-1-s"}
+            {title: "Neu", cmd: "add", uiIcon: "ui-icon-plus", action: function(event, ui){
+                alert("Add " + ui.target.text());
+            }},
+            {title: "L&ouml;schen", cmd: "delete", uiIcon: "ui-icon-trash", action: function(event, ui){
+
+                alert("Delete " + ui.target.text());
+
+                var tree = $("div#books_tree").fancytree("getTree");
+
+                $.ajax({
+                    type: 'DELETE',
+                    url: tree.getActiveNode().data.base_url + ".json",
+                    contentType: "application/json"
+                });
+            }},
+            {title: "Exportieren", cmd: "export", uiIcon: "ui-icon-arrowthickstop-1-s", action: function(event, ui){
+                alert("Export " + ui.target.text());
+            }}
         ],
         beforeOpen: function(event, ui) {
             var node = $.ui.fancytree.getNode(ui.target);
 //                node.setFocus();
             node.setActive();
-        },
-        select: function(event, ui) {
-            var node = $.ui.fancytree.getNode(ui.target);
-            alert("select " + ui.cmd + " on " + node);
         }
     });
 
