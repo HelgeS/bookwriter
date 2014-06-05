@@ -1,8 +1,10 @@
 $(function () {
     /* This is fancytree from https://github.com/mar10/fancytree */
-    $("div#books_tree").fancytree({
+    var tree_div = $("div#books_tree");
+
+    tree_div.fancytree({
         source: {
-            url: $("#books_tree").data("url"),
+            url: tree_div.data("url"),
             cache: false
         },
         checkbox: false,
@@ -59,7 +61,7 @@ $(function () {
         }
     });
     /* This is jquery-ui-contextmenu from https://github.com/mar10/jquery-ui-contextmenu */
-    $("div#books_tree").contextmenu({
+    tree_div.contextmenu({
         delegate: "span.fancytree-title",
         menu: [
             {title: "Neu", cmd: "add", uiIcon: "ui-icon-plus", action: function(event, ui){
@@ -87,5 +89,4 @@ $(function () {
             node.setActive();
         }
     });
-
 });

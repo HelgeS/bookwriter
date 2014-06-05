@@ -12,7 +12,7 @@ initSortableTable = function() {
 };
 
 reloadTreeview = function() {
-    $("div#books_tree").fancytree();
+    $("div#books_tree").fancytree("getTree").load();
 };
 
 $(function() {
