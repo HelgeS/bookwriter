@@ -33,7 +33,7 @@ class BooksController < ApplicationController
       end
 
       tree_book = {
-        title: "#{b.title} (#{b.edition})",
+        title: "#{b.title} (#{b.edition}. Edition)",
         key: b.id,
         folder: true,
         href: edit_book_path(b),
