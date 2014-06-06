@@ -12,4 +12,11 @@
  *= require_tree .
  *= require jquery.ui.all
  *= require fancytree/ui.fancytree.min
+ *= require jquery-textext/textext.core
+ *= require jquery-textext/textext.plugin.autocomplete
+ *= require jquery-textext/textext.plugin.focus
+ *= require jquery-textext/textext.plugin.prompt
+ *= require jquery-textext/textext.plugin.tags
  */
+
+

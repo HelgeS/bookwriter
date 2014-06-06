@@ -1,14 +1,14 @@
 $(document).ready(function () {
-    $('#chunk_username').autocomplete({
+    /*$('#chunk_username').autocomplete({
         source: '/autocomplete/users',
         select: function(event,ui) {
             $('#chunk_user_id').val(ui.item.id);
         }
-    });
+    });*/
 
     function split(val) {
         return val.split(/,\s*/);
-    }
+    }/*
     function extractLast(term) {
         return split(term).pop();
     }
@@ -57,6 +57,17 @@ $(document).ready(function () {
             terms.push("");
             this.value = terms.join(", ");
             return false;
+        }
+    });*/
+
+    $('#book_usernames').textext({
+        plugins : 'tags prompt focus autocomplete ajax',
+        tagsItems : [ 'Basic', 'JavaScript', 'PHP', 'Scala' ],
+        prompt : 'Add one...',
+        ajax : {
+            url : '/manual/examples/data.json',
+            dataType : 'json',
+            cacheResults : true
         }
     });
 });

@@ -13,6 +13,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require jquery.ui.all
-//= require_tree .
 //= require ckeditor/init
 //= require fancytree
+//= require jquery-textext
+//= require_tree .
