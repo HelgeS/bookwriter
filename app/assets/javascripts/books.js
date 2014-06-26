@@ -10,3 +10,15 @@ initSortableTable = function() {
         helper: fixHelper
     }).disableSelection();
 };
+
+reloadTreeview = function() {
+    $("div#books_tree").fancytree("getTree").load();
+};
+
+$(function() {
+    initSortableTable();
+
+    $('a[data-reload-treeview]').click(function(){
+        reloadTreeview();
+    })
+});

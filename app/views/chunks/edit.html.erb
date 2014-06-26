@@ -1,1 +1,12 @@
 <%= render 'form' %>
+
+<h2>&Auml;nderungshistorie</h2>
+<ul>
+<% @chunk.versions.sort_by {|obj| obj.index }.reverse.each do |v| %>
+  <li>Version <%= v.index %> vom <%= v.created_at.strftime('%d.%m.%Y - %H:%M') %></li>
+<% end %>
+</ul>
+
+<div id="dialog" title="Änderungen">
+  <p></p>
+</div>
