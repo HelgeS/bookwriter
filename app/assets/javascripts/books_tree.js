@@ -68,9 +68,6 @@ $(function () {
                 alert("Add " + ui.target.text());
             }},
             {title: "L&ouml;schen", cmd: "delete", uiIcon: "ui-icon-trash", action: function(event, ui){
-
-                alert("Delete " + ui.target.text());
-
                 var tree = $("div#books_tree").fancytree("getTree");
 
                 $.ajax({
@@ -78,6 +75,8 @@ $(function () {
                     url: tree.getActiveNode().data.base_url + ".json",
                     contentType: "application/json"
                 });
+
+                tree.reload();
             }},
             {title: "Exportieren", cmd: "export", uiIcon: "ui-icon-arrowthickstop-1-s", action: function(event, ui){
                 alert("Export " + ui.target.text());
