@@ -48,6 +48,10 @@ class ChunksController < ApplicationController
     @chunk = Chunk.new(params[:chunk])
     @chunk.book = @book
 
+    if @chunk.user.nil?
+      @chunk.user = current_user
+    end
+
     respond_to do |format|
       if @chunk.save
         format.html { redirect_to @book, notice: 'Chunk was successfully created.' }

@@ -1,3 +1,7 @@
-<div id="books_tree" data-url="<% if @book.nil? or @book.id.nil? %><%= books_treeview_path "json" %><% else %><%= book_treeview_path @book, "json" %><% end %>">
-
+<div id="books_tree"
+  <% if @book.nil? or @book.id.nil? %>
+    data-url="<%= books_treeview_path 'json' %>" data-chunks-url=""
+  <% else %>
+    data-url="<%= book_treeview_path @book, 'json' %>" data-chunks-url="<%= book_chunks_path @book, 'json' %>"
+  <% end %>">
 </div>
