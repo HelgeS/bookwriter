@@ -48,10 +48,14 @@ class ChunksController < ApplicationController
     @chunk = Chunk.new(params[:chunk])
     @chunk.book = @book
 
+    if @chunk.user.nil?
+      @chunk.user = current_user
+    end
+
     respond_to do |format|
       if @chunk.save
         format.html { redirect_to @book, notice: 'Chunk was successfully created.' }
-        format.json { render json: @chunk, status: :created, location: @chunk }
+        format.json { render json: @chunk, status: :created, location: book_chunk_url(@book, @chunk) }
       else
         format.html { render action: "new" }
         format.json { render json: @chunk.errors, status: :unprocessable_entity }

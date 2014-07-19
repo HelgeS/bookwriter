@@ -15,5 +15,6 @@
 //= require jquery.ui.all
 //= require ckeditor/init
 //= require fancytree
+//= require jquery.ui-contextmenu.min
 //= require bootstrap.min
 //= require_tree .
