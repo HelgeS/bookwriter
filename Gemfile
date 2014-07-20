@@ -28,6 +28,7 @@ group :assets do
   gem 'therubyracer', :platforms => :ruby
   gem 'uglifier', '>= 1.0.3'
   gem 'yui-compressor', '0.11'
+  gem 'turbo-sprockets-rails3'
 end
 
 group :test do
