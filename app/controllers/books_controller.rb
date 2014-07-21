@@ -37,6 +37,7 @@ class BooksController < ApplicationController
         key: b.id,
         folder: true,
         href: edit_book_path(b),
+        base_url: book_path(b),
         expanded: (params[:book_id].to_i == b.id),
         children: children
       }
@@ -81,6 +82,10 @@ class BooksController < ApplicationController
   # POST /books.json
   def create
     @book = Book.new(params[:book])
+
+    if @book.users.nil?
+      @book.users = current_user
+    end
 
     respond_to do |format|
       if @book.save

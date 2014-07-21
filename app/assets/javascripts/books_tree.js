@@ -1,4 +1,48 @@
 $(function () {
+    function chunk_add_before(event, ui) {
+        var tree = $("div#books_tree").fancytree("getTree");
+        var position = tree.getActiveNode().getIndex();
+
+        $.post(tree.data.chunksUrl,
+            {chunk:{position:position, title:'Neues Element'}}
+        );
+
+        tree.reload();
+    };
+
+    function chunk_add_after(event, ui) {
+        var tree = $("div#books_tree").fancytree("getTree");
+        var position = tree.getActiveNode().getIndex() + 1;
+
+        $.post(tree.data.chunksUrl,
+            {chunk:{position:position, title:'Neues Element'}}
+        );
+
+        tree.reload();
+    };
+
+    function delete_entry(event, ui) {
+        var tree = $("div#books_tree").fancytree("getTree");
+
+        $.ajax({
+            type: 'DELETE',
+            url: tree.getActiveNode().data.base_url + ".json",
+            contentType: "application/json"
+        });
+
+        tree.reload();
+    };
+
+    function book_add(event, ui) {
+        var tree = $("div#books_tree").fancytree("getTree");
+
+        $.post(tree.data.booksUrl,
+            {book:{title:'Neues Buch'}}
+        );
+
+        tree.reload();
+    };
+
     /* This is fancytree from https://github.com/mar10/fancytree */
     var tree_div = $("div#books_tree");
 
@@ -63,49 +107,30 @@ $(function () {
     /* This is jquery-ui-contextmenu from https://github.com/mar10/jquery-ui-contextmenu */
     tree_div.contextmenu({
         delegate: "span.fancytree-title",
-        menu: [
-            {title: "Neu", uiIcon: "ui-icon-plus", children: [
-                {title: "Davor", cmd: "add_before", uiIcon: "ui-icon-arrowthick-1-n", action: function(event, ui){
-                    var tree = $("div#books_tree").fancytree("getTree");
-                    var position = tree.getActiveNode().getIndex();
-
-                    $.post(tree.data.chunksUrl,
-                        {chunk:{position:position, title:'Neues Element'}}
-                    );
-
-                    tree.reload();
-
-                }},
-                {title: "Dahinter", cmd: "add_after", uiIcon: "ui-icon-arrowthick-1-s", action: function(event, ui){
-                    var tree = $("div#books_tree").fancytree("getTree");
-                    var position = tree.getActiveNode().getIndex() + 1;
-
-                    $.post(tree.data.chunksUrl,
-                        {chunk:{position:position, title:'Neues Element'}}
-                    );
-
-                    tree.reload();
-                }}
-            ]} ,
-            {title: "L&ouml;schen", cmd: "delete", uiIcon: "ui-icon-trash", action: function(event, ui){
-                var tree = $("div#books_tree").fancytree("getTree");
-
-                $.ajax({
-                    type: 'DELETE',
-                    url: tree.getActiveNode().data.base_url + ".json",
-                    contentType: "application/json"
-                });
-
-                tree.reload();
-            }}/*,
-            {title: "Exportieren", cmd: "export", uiIcon: "ui-icon-arrowthickstop-1-s", action: function(event, ui){
-                alert("Export " + ui.target.text());
-            }}*/
-        ],
         beforeOpen: function(event, ui) {
-            var node = $.ui.fancytree.getNode(ui.target);
+            var menu = ui.menu,
+                target = ui.target,
+                node = $.ui.fancytree.getNode(ui.target),
+                isBookSelected = node.isFolder();
 //                node.setFocus();
             node.setActive();
+
+            if (isBookSelected) {
+                var new_menu = [
+                    {title: "Neu", uiIcon: "ui-icon-plus", cmd: "book_add", uiIcon: "ui-icon-plus", action: book_add},
+                    {title: "L&ouml;schen", cmd: "book_delete", uiIcon: "ui-icon-trash", action: delete_entry}
+                ]
+            } else {
+                var new_menu = [
+                        {title: "Neu", uiIcon: "ui-icon-plus", children: [
+                        {title: "Davor", cmd: "chunk_add_before", uiIcon: "ui-icon-arrowthick-1-n", action: chunk_add_before},
+                        {title: "Dahinter", cmd: "chunk_add_after", uiIcon: "ui-icon-arrowthick-1-s", action: chunk_add_after}
+                    ]} ,
+                    {title: "L&ouml;schen", cmd: "chunk_delete", uiIcon: "ui-icon-trash", action: delete_entry}
+                ]
+            }
+
+            $(tree_div).contextmenu("replaceMenu", new_menu);
         }
     });
 });
