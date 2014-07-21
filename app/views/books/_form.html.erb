@@ -11,29 +11,33 @@
     </div>
   <% end %>
 
+  <div class="actions">
+    <%= f.submit 'Speichern', class: 'btn btn-primary' %>
+  </div>
+
   <div class="field">
     <%= f.label :title %><br />
-    <%= f.text_field :title %>
+    <%= f.text_field :title, class: 'form-control' %>
   </div>
   <div class="field">
     <%= f.label :edition %><br />
-    <%= f.number_field :edition %>
+    <%= f.number_field :edition, class: 'form-control' %>
   </div>
   <div class="field">
     <%= f.label :published %><br />
-    <%= f.date_select :published %>
+    <%= f.date_select :published, class: 'form-control' %>
   </div>
   <div class="field">
     <%= f.label :genre %><br />
-    <%= f.text_field :genre %>
+    <%= f.text_field :genre, class: 'form-control' %>
   </div>
   <div class="field">
     <%= f.label :abstract %><br />
-    <%= f.cktext_area :abstract %>
+    <%= f.cktext_area :abstract, class: 'form-control' %>
   </div>
   <div class="field">
     <%= f.label :tags %><br />
-    <%= f.text_field :tags %>
+    <%= f.text_field :tags, class: 'form-control' %>
   </div>
   <div class="field">
     <%= f.label :users %><br/>
@@ -43,8 +47,5 @@
         <%= user.email %>
       </div>
     <% end %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
   </div>
 <% end %>
