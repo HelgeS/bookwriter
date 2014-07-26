@@ -8,28 +8,44 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-<div id="layout_container">
-  <div id="top">
-    <% if user_signed_in? %>
-        <%= link_to 'Home', books_path %> |
-        <%= "Konto: #{current_user.email}" %> |
-        <%= link_to 'Meine Daten', edit_user_registration_path %> |
-        <%= link_to 'Logout', destroy_user_session_path, method: :delete %>
-    <% end %>
-  </div>
-  <div id="left">
-    <%= yield :left %>
-  </div>
-  <div id="content">
-    <% if flash[:notice] %>
-        <p id="notice"><%= flash[:notice] %></p>
-    <% end %>
+<div class="container-fluid" id="layout_container">
+  <nav class="navbar navbar-default" role="navigation" id="top">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#"><span class="glyphicon glyphicon-book"></span> BookWriter</a>
+      </div>
+      <div class="navbar-collapse collapse">
+        <ul class="nav navbar-nav navbar-right">
+        <% if user_signed_in? %>
+            <li><%= link_to books_path do %><span class="glyphicon glyphicon-home"></span> Startseite<% end %></li>
+            <li><%= link_to edit_user_registration_path do %><span class="glyphicon glyphicon-cog"></span> Meine Daten (<%= current_user.email %>)<% end %></li>
+            <li><%= link_to destroy_user_session_path, method: :delete  do %><span class="glyphicon glyphicon-off"></span> Abmelden<% end %></li>
+        <% end %>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <div class="row">
+    <div class="col-md-3" id="left">
+      <%= yield :left %>
+    </div>
+    <div class="col-md-9" id="content">
+      <% if flash[:notice] %>
+        <div class="alert alert-warning" id="notice" role="alert"><%= flash[:notice] %></div>
+      <% end %>
 
-    <% if flash[:error] %>
-        <p id="error"><%= flash[:error] %></p>
-    <% end %>
+      <% if flash[:error] %>
+        <div id="error" class="alert alert-danger" role="alert"><%= flash[:error] %></div>
+      <% end %>
 
-    <%= yield %>
+      <%= yield %>
+    </div>
   </div>
 </div>
 </body>

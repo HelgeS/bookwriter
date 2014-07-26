@@ -8,15 +8,24 @@
  * You're free to add application-wide styles to this file and they'll appear at the top of the
  * compiled file, but it's generally better to create a new file per style scope.
  *
- *= require_self
- *= require_tree .
  *= require jquery.ui.all
  *= require fancytree/ui.fancytree.min
+ *= require bootstrap/bootstrap.min
+ *= require bootstrap/bootstrap-theme.min
  *= require jquery-textext/textext.core
  *= require jquery-textext/textext.plugin.autocomplete
  *= require jquery-textext/textext.plugin.focus
  *= require jquery-textext/textext.plugin.prompt
  *= require jquery-textext/textext.plugin.tags
+ *= require_self
+ *= require_tree .
  */
 
-
+@font-face {
+    font-family: 'Glyphicons Halflings';
+    src: url('../assets/glyphicons-halflings-regular.eot');
+    src: url('../assets/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'),
+    url('../assets/glyphicons-halflings-regular.woff') format('woff'),
+    url('../assets/glyphicons-halflings-regular.ttf') format('truetype'),
+    url('../assets/glyphicons-halflings-regular.svg#glyphicons_halflingsregular') format('svg');
+}

@@ -24,12 +24,12 @@
 </p>
 
 <p>
-  <%= link_to 'Als gesamtes Dokument anzeigen', book_export_path(@book, 'html'), :target => '_blank' %>
-  <%= link_to 'Als PDF exportieren', book_export_path(@book, 'pdf'), :target => '_blank' %>
+  <%= link_to 'Gesamtes Dokument anzeigen', book_export_path(@book, 'html'), :target => '_blank' %> |
+  <%= link_to 'Als PDF exportieren', book_export_path(@book, 'pdf'), :target => '_blank' %> |
   <%= link_to 'Als ePub exportieren', book_export_path(@book, 'epub') %>
 </p>
 
-<h2>Chunks</h2>
+<h2>Kapitel</h2>
 <% if @book.has_chunks? %>
   <table id="sortable">
     <thead>
@@ -62,11 +62,7 @@
 <% end %>
 <%= button_to 'New Chunk', new_book_chunk_path(@book), method: :get %>
 <br/>
-
-<%= javascript_tag do -%>
-  $(function() {
-    initSortableTable();
-  });
-<% end -%>
+<%= link_to 'Neuladen Baumansicht', '#', data: {'reload-treeview' => true}, remote: true %>
+<br/>
 
 <%= link_to 'Back', books_path %>

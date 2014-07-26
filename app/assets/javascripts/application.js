@@ -16,4 +16,6 @@
 //= require ckeditor/init
 //= require fancytree
 //= require jquery-textext
+//= require jquery.ui-contextmenu.min
+//= require bootstrap.min
 //= require_tree .

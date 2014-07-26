@@ -1,8 +1,54 @@
 $(function () {
+    function chunk_add_before(event, ui) {
+        var tree = $("div#books_tree").fancytree("getTree");
+        var position = tree.getActiveNode().getIndex();
+
+        $.post(tree.data.chunksUrl,
+            {chunk:{position:position, title:'Neues Element'}}
+        );
+
+        tree.reload();
+    };
+
+    function chunk_add_after(event, ui) {
+        var tree = $("div#books_tree").fancytree("getTree");
+        var position = tree.getActiveNode().getIndex() + 1;
+
+        $.post(tree.data.chunksUrl,
+            {chunk:{position:position, title:'Neues Element'}}
+        );
+
+        tree.reload();
+    };
+
+    function delete_entry(event, ui) {
+        var tree = $("div#books_tree").fancytree("getTree");
+
+        $.ajax({
+            type: 'DELETE',
+            url: tree.getActiveNode().data.base_url + ".json",
+            contentType: "application/json"
+        });
+
+        tree.reload();
+    };
+
+    function book_add(event, ui) {
+        var tree = $("div#books_tree").fancytree("getTree");
+
+        $.post(tree.data.booksUrl,
+            {book:{title:'Neues Buch'}}
+        );
+
+        tree.reload();
+    };
+
     /* This is fancytree from https://github.com/mar10/fancytree */
-    $("div#books_tree").fancytree({
+    var tree_div = $("div#books_tree");
+
+    tree_div.fancytree({
         source: {
-            url: $("#books_tree").data("url"),
+            url: tree_div.data("url"),
             cache: false
         },
         checkbox: false,
@@ -51,16 +97,40 @@ $(function () {
                     contentType: "application/json",
                     data: JSON.stringify({chunk:{position:data.otherNode.getIndex()+1}, _method:'put'}),
                     context: data
-                }); /*.done(function (msg) {
-                    $.get(this.node.parent.data.href, { 'render_template': false }, function (new_data) {
-                        $("div#content").html(new_data);
-                    });
-                });*/
+                });
             }
         },
         click: function(event, data) {
-
             window.location = data.node.data.href;
+        }
+    });
+    /* This is jquery-ui-contextmenu from https://github.com/mar10/jquery-ui-contextmenu */
+    tree_div.contextmenu({
+        delegate: "span.fancytree-title",
+        beforeOpen: function(event, ui) {
+            var menu = ui.menu,
+                target = ui.target,
+                node = $.ui.fancytree.getNode(ui.target),
+                isBookSelected = node.isFolder();
+//                node.setFocus();
+            node.setActive();
+
+            if (isBookSelected) {
+                var new_menu = [
+                    {title: "Neu", uiIcon: "ui-icon-plus", cmd: "book_add", uiIcon: "ui-icon-plus", action: book_add},
+                    {title: "L&ouml;schen", cmd: "book_delete", uiIcon: "ui-icon-trash", action: delete_entry}
+                ]
+            } else {
+                var new_menu = [
+                        {title: "Neu", uiIcon: "ui-icon-plus", children: [
+                        {title: "Davor", cmd: "chunk_add_before", uiIcon: "ui-icon-arrowthick-1-n", action: chunk_add_before},
+                        {title: "Dahinter", cmd: "chunk_add_after", uiIcon: "ui-icon-arrowthick-1-s", action: chunk_add_after}
+                    ]} ,
+                    {title: "L&ouml;schen", cmd: "chunk_delete", uiIcon: "ui-icon-trash", action: delete_entry}
+                ]
+            }
+
+            $(tree_div).contextmenu("replaceMenu", new_menu);
         }
     });
 });

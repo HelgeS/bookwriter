@@ -26,16 +26,18 @@ class BooksController < ApplicationController
             title: c.title,
             key: c.id,
             href: edit_book_chunk_path(b, c),
-            position_url: book_chunk_position_path(b, c, "json")
+            position_url: book_chunk_position_path(b, c, "json"),
+            base_url: book_chunk_path(b, c)
         }
         children.push tree_chunk
       end
 
       tree_book = {
-        title: "#{b.title} (#{b.edition})",
+        title: "#{b.title} (#{b.edition}. Edition)",
         key: b.id,
         folder: true,
-        href: book_path(b),
+        href: edit_book_path(b),
+        base_url: book_path(b),
         expanded: (params[:book_id].to_i == b.id),
         children: children
       }
@@ -80,6 +82,10 @@ class BooksController < ApplicationController
   # POST /books.json
   def create
     @book = Book.new(params[:book])
+
+    if @book.users.nil?
+      @book.users = current_user
+    end
 
     respond_to do |format|
       if @book.save

@@ -1,4 +1,4 @@
-<%= form_for([@book, @chunk]) do |f| %>
+<%= form_for([@book, @chunk], html: {class: 'form', role: 'form'}) do |f| %>
   <% if @chunk.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@chunk.errors.count, "error") %> prohibited this chunk from being saved:</h2>
@@ -11,25 +11,25 @@
     </div>
   <% end %>
 
+  <div class="actions">
+    <%= f.submit 'Speichern', class: 'btn btn-primary' %>
+  </div>
+
   <%= f.hidden_field :original_updated_at %>
-  <div class="field">
+  <div class="field form-group">
     <%= f.label :title %><br />
-    <%= f.text_field :title %>
+    <%= f.text_field :title, class: 'form-control' %>
   </div>
-  <div class="field">
+  <div class="field form-group">
     <%= f.label :section %><br />
-    <%= f.text_field :section %>
+    <%= f.text_field :section, class: 'form-control' %>
   </div>
-  <div class="field">
+  <div class="field form-group">
     <%= f.label :user %><br />
     <%= f.text_field :username %>
     <%= f.hidden_field :user_id %>
   </div>
-  <div class="field">
-    <%= f.label :content %><br />
-    <%= f.cktext_area :content %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
+  <div class="field form-group">
+    <%= f.cktext_area :content, class: 'form-control' %>
   </div>
 <% end %>
