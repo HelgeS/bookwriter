@@ -1,24 +1,30 @@
 $(function () {
-    function chunk_add_before(event, ui) {
-        var tree = $("div#books_tree").fancytree("getTree");
-        var position = tree.getActiveNode().getIndex();
-
+    function execute_add_chunk(tree, position) {
         $.post(tree.data.chunksUrl,
             {chunk:{position:position, title:'Neues Element'}}
         );
 
         tree.reload();
+    }
+
+    function chunk_add(event, ui) {
+        var tree = $("div#books_tree").fancytree("getTree");
+
+        execute_add_chunk(tree, 0);
+    }
+
+    function chunk_add_before(event, ui) {
+        var tree = $("div#books_tree").fancytree("getTree");
+        var position = tree.getActiveNode().getIndex();
+
+        execute_add_chunk(tree, position);
     };
 
     function chunk_add_after(event, ui) {
         var tree = $("div#books_tree").fancytree("getTree");
         var position = tree.getActiveNode().getIndex() + 1;
 
-        $.post(tree.data.chunksUrl,
-            {chunk:{position:position, title:'Neues Element'}}
-        );
-
-        tree.reload();
+        execute_add_chunk(tree, position);
     };
 
     function delete_entry(event, ui) {
@@ -29,16 +35,6 @@ $(function () {
             url: tree.getActiveNode().data.base_url + ".json",
             contentType: "application/json"
         });
-
-        tree.reload();
-    };
-
-    function book_add(event, ui) {
-        var tree = $("div#books_tree").fancytree("getTree");
-
-        $.post(tree.data.booksUrl,
-            {book:{title:'Neues Buch'}}
-        );
 
         tree.reload();
     };
@@ -117,7 +113,7 @@ $(function () {
 
             if (isBookSelected) {
                 var new_menu = [
-                    {title: "Neu", uiIcon: "ui-icon-plus", cmd: "book_add", uiIcon: "ui-icon-plus", action: book_add},
+                    {title: "Neues Element", cmd: "chunk_add", uiIcon: "ui-icon-plus", action: chunk_add},
                     {title: "L&ouml;schen", cmd: "book_delete", uiIcon: "ui-icon-trash", action: delete_entry}
                 ]
             } else {
