@@ -22,3 +22,7 @@ $(function() {
         reloadTreeview();
     })
 });
+
+$('.ckeditor').ckeditor({
+    // optional config
+});

@@ -17,3 +17,7 @@ $(function() {
         autoOpen: false
     });
 });
+
+$('.ckeditor').ckeditor({
+    // optional config
+});
