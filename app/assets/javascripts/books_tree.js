@@ -9,13 +9,13 @@ $(function () {
         );
 
         tree.reload();
-    }
+    };
 
     function chunk_add(event, ui) {
         var tree = $("div#books_tree").fancytree("getTree");
 
         execute_add_chunk(tree, 0);
-    }
+    };
 
     function chunk_add_before(event, ui) {
         var tree = $("div#books_tree").fancytree("getTree");
