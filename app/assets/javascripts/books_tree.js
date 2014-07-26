@@ -1,7 +1,11 @@
 $(function () {
     function execute_add_chunk(tree, position) {
         $.post(tree.data.chunksUrl,
-            {chunk:{position:position, title:'Neues Element'}}
+            {chunk:{position:position, title:'Neues Element'}},
+            function(data, status, xhr) {
+                var location = xhr.getResponseHeader('Location');
+                $.get(location + "/edit.js");
+            }
         );
 
         tree.reload();
