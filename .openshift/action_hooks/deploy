@@ -40,6 +40,9 @@ else
   fi
 fi
 
+cd $OPENSHIFT_REPO_DIR
+RAILS_ENV=production bundle exec rake assets:precompile
+
 pushd ${OPENSHIFT_REPO_DIR} > /dev/null
 echo "exec rake db:migrate RAILS_ENV=${RAILS_ENV:-production}"
 ruby_with_nodejs_context "bundle exec rake db:migrate RAILS_ENV=${RAILS_ENV:-production}"
