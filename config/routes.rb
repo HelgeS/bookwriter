@@ -8,6 +8,7 @@ Bookwriter::Application.routes.draw do
   resources :books do
     get :treeview
     get :export
+    get :autocomplete_user_email, :on => :collection
 
     resources :chunks do
       put :position

@@ -12,6 +12,10 @@ class User < ActiveRecord::Base
   has_many :chunks
 
   def full_name
-    "#{self.first_name} #{self.last_name}"
+    if (self.first_name.nil? or self.last_name.nil?) then
+      self.email
+    else
+      "#{self.first_name} #{self.last_name}"
+    end
   end
 end

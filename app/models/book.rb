@@ -1,5 +1,5 @@
 class Book < ActiveRecord::Base
-  attr_accessible :abstract, :edition, :genre, :published, :tags, :title, :user_ids
+  attr_accessible :abstract, :edition, :genre, :published, :tags, :title, :users, :user_ids
   before_destroy :destroy_chunks
 
   has_and_belongs_to_many :users

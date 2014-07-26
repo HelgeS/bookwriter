@@ -32,20 +32,22 @@
     <%= f.text_field :genre, class: 'form-control' %>
   </div>
   <div class="field">
-    <%= f.label :abstract %><br />
-    <%= f.cktext_area :abstract, class: 'form-control' %>
-  </div>
-  <div class="field">
     <%= f.label :tags %><br />
     <%= f.text_field :tags, class: 'form-control' %>
   </div>
   <div class="field">
     <%= f.label :users %><br/>
-    <% @users.each do |user| %>
-      <div>
-        <%= check_box_tag "book[user_ids][]", user.id, @book.users.include?(user) %>
-        <%= user.email %>
-      </div>
-    <% end %>
+    <%= f.autocomplete_field :users,
+                             autocomplete_user_email_books_path,
+                             'data-delimiter' => ',',
+                             :multiple => true,
+                             'data-auto-focus' => true,
+                             :id_element => '#user_ids',
+                             class: 'form-control' %>
+    <%= f.hidden_field :user_ids %>
+  </div>
+  <div class="field">
+    <%= f.label :abstract %><br />
+    <%= f.cktext_area :abstract, class: 'form-control' %>
   </div>
 <% end %>
