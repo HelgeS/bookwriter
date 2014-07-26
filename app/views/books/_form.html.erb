@@ -32,10 +32,6 @@
     <%= f.text_field :genre, class: 'form-control' %>
   </div>
   <div class="field">
-    <%= f.label :abstract %><br />
-    <%= f.cktext_area :abstract, class: 'form-control' %>
-  </div>
-  <div class="field">
     <%= f.label :tags %><br />
     <%= f.text_field :tags, class: 'form-control' %>
   </div>
@@ -44,8 +40,16 @@
     <% @users.each do |user| %>
       <div>
         <%= check_box_tag "book[user_ids][]", user.id, @book.users.include?(user) %>
-        <%= user.email %>
+        <% if user.email.eql?(user.full_name) %>
+          <%= user.email %>
+        <% else %>
+          <%= user.full_name %> (<%= user.email %>)
+        <% end %>
       </div>
     <% end %>
+  </div>
+  <div class="field">
+    <%= f.label :abstract %><br />
+    <%= f.cktext_area :abstract, class: 'form-control' %>
   </div>
 <% end %>
