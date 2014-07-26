@@ -1,6 +1,6 @@
 class Book < ActiveRecord::Base
   attr_accessible :abstract, :edition, :genre, :published, :tags, :title, :user_ids
-  attr_accessor :usernames
+  attr_accessor :email_users
   before_destroy :destroy_chunks
 
   has_and_belongs_to_many :users
@@ -17,7 +17,7 @@ class Book < ActiveRecord::Base
   end
 
   def usernames
-    users.map { |u| u.full_name }.join(', ')
+    users.map { |u| u.email }.join(', ')
   end
 
   def has_chunks?

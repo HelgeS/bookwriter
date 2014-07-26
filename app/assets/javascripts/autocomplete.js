@@ -60,12 +60,10 @@ $(document).ready(function () {
         }
     });*/
 
-    $('#book_usernames').textext({
-        plugins : 'tags prompt focus autocomplete ajax',
-        tagsItems : [ 'Basic', 'JavaScript', 'PHP', 'Scala' ],
-        prompt : 'Add one...',
+    $('#book_email_users').textext({
+        plugins : 'arrow autocomplete filter tags ajax',
         ajax : {
-            url : '/manual/examples/data.json',
+            url : '/autocomplete/users.json',
             dataType : 'json',
             cacheResults : true
         }

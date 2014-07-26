@@ -32,16 +32,15 @@
     <%= f.text_field :genre, class: 'form-control' %>
   </div>
   <div class="field">
-    <%= f.label :abstract %><br />
-    <%= f.cktext_area :abstract, class: 'form-control' %>
-  </div>
-  <div class="field">
     <%= f.label :tags %><br />
     <%= f.text_field :tags, class: 'form-control' %>
   </div>
   <div class="field">
     <%= f.label :users %><br/>
-    <%= f.text_field :usernames %>
-    <%= f.hidden_field :user_ids %>
+    <%= f.text_area :email_users, rows: 1 %>
+  </div>
+  <div class="field">
+    <%= f.label :abstract %><br />
+    <%= f.cktext_area :abstract, class: 'form-control' %>
   </div>
 <% end %>

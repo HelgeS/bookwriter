@@ -103,6 +103,10 @@ class BooksController < ApplicationController
   def update
     params[:book][:user_ids] ||= []
 
+    params[:book][:email_users].each { |u|
+      params[:book][:user_ids] += User.find_by_email u
+    }
+
     @book = Book.find(params[:id])
 
     respond_to do |format|

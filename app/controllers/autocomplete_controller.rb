@@ -9,7 +9,9 @@ class AutocompleteController < ApplicationController
       users = User.all
     end
 
-    list = users.map {|u| Hash[id: u.id, label: u.full_name, name: u.full_name]}
+    #list = users.map {|u| Hash[id: u.id, label: u.full_name, name: u.full_name]}
+    list = users.map {|u| u.email}
+
     render json: list
   end
 end
