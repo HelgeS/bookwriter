@@ -11,6 +11,7 @@ gem 'paperclip', '~> 3.5.4' # Versionierung
 gem 'ckeditor' # WYSIWYG-Editor
 #gem 'ckeditor_rails' # Integration in asset pipeline
 gem 'acts_as_list'
+gem 'htmldiff'
 
 # PDF-Creation
 gem 'wkhtmltopdf-binary' # Commandline tool for pdf creation
