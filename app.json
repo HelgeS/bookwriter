@@ -2,5 +2,6 @@
     "name": "TeamSB: BookWriter",
     "description": "BookWriter project for study course Web Engineering at H-BRS, Germany, using RoR",
     "repository": "https://github.com/team-sb/bookwriter",
-    "keywords": ["bookwriter", "ruby", "rails"]
+    "keywords": ["bookwriter", "ruby", "rails"],
+    "addons": ["heroku-postgresql"]
 }
