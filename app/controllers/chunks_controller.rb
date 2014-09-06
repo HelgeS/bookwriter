@@ -1,4 +1,5 @@
 class ChunksController < ApplicationController
+  include VersionsHelper
   layout 'books_and_chunks'
   before_filter :authenticate_user!
   before_filter :find_book
@@ -70,7 +71,7 @@ class ChunksController < ApplicationController
 
     respond_to do |format|
       if @chunk.update_attributes(params[:chunk])
-        format.html { redirect_to @book, notice: 'Chunk was successfully updated.' }
+        format.html { redirect_to :back, notice: 'Chunk was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
@@ -102,6 +103,47 @@ class ChunksController < ApplicationController
       format.html { redirect_to @book }
       format.json { head :no_content }
     end
+  end
+
+  def diff
+    version = (find_chunk_version params[:chunk_id], params[:version_id]).reify
+    old_content = version.content || ''
+    new_content = @chunk.content || ''
+
+    @chunk.content = DiffHelper.new.diff(old_content, new_content)
+
+    respond_to do |format|
+      format.html { render action: 'show' }# show.html.erb
+      format.json { render json: @chunk }
+    end
+  end
+
+  def revert
+    @chunk = Chunk.find(params[:chunk_id])
+    @version = find_chunk_version params[:chunk_id], params[:version_id]
+
+    if @version.reify
+      old_version = @version.reify
+      @chunk.content = old_version.content
+      @chunk.save!
+    else
+      redirect_to :back, :notice => 'Die Wiederherstellung konnte nicht abgeschlossen werden.'
+      return
+    end
+
+    redirect_to :back, :notice => "Version #{@version.index} wiederhergestellt!"
+  end
+
+  private
+  def find_chunk_version(chunk_id, version_id)
+    @chunk = Chunk.find(chunk_id)
+    version = @chunk.versions.find(version_id)
+
+    if version.nil?
+      redirect_to :back
+      return
+    end
+    return version
   end
 
   private

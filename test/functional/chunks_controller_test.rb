@@ -40,12 +40,6 @@ class ChunksControllerTest < ActionController::TestCase
     assert_response :success
   end
 
-  test "should update chunk" do
-    sign_in :user, @user
-    put :update, id: @chunk, chunk: { content: @chunk.content, section: @chunk.section, title: @chunk.title }, book_id: @chunk.book.id
-    assert_redirected_to book_path(assigns(:book))
-  end
-
   test "should destroy chunk" do
     sign_in :user, @user
     assert_difference('Chunk.count', -1) do

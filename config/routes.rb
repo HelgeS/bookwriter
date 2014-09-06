@@ -3,7 +3,7 @@ Bookwriter::Application.routes.draw do
 
   root :to => 'books#index'
 
-  get 'books/treeview', to: 'books#treeview', as: :books_treeview
+  get 'books/treeview' => 'books#treeview', as: :books_treeview
 
   resources :books do
     get :treeview
@@ -11,6 +11,9 @@ Bookwriter::Application.routes.draw do
 
     resources :chunks do
       put :position
+
+      get 'versions/:version_id/diff' => 'chunks#diff', as: 'diff_version'
+      post 'versions/:version_id/revert' => 'chunks#revert', as: 'revert_version'
     end
   end
 

@@ -7,7 +7,7 @@ class Chunk < ActiveRecord::Base
   validate :handle_conflict, only: :update
   before_save :set_position
 
-  has_paper_trail
+  has_paper_trail :only => [:content]
 
   def username
     user.email
