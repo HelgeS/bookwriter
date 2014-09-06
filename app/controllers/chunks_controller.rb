@@ -71,7 +71,7 @@ class ChunksController < ApplicationController
 
     respond_to do |format|
       if @chunk.update_attributes(params[:chunk])
-        format.html { redirect_to @book, notice: 'Chunk was successfully updated.' }
+        format.html { redirect_to :back, notice: 'Chunk was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
@@ -119,15 +119,19 @@ class ChunksController < ApplicationController
   end
 
   def revert
+    @chunk = Chunk.find(params[:chunk_id])
     @version = find_chunk_version params[:chunk_id], params[:version_id]
 
     if @version.reify
-      @version.reify.save!
+      old_version = @version.reify
+      @chunk.content = old_version.content
+      @chunk.save!
     else
-      @version.item.destroy
+      redirect_to :back, :notice => 'Die Wiederherstellung konnte nicht abgeschlossen werden.'
+      return
     end
 
-    redirect_to :back, :notice => "Undid #{@version.event}."
+    redirect_to :back, :notice => "Version #{@version.index} wiederhergestellt!"
   end
 
   private
