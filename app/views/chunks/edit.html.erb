@@ -2,9 +2,9 @@
 
 <h2>&Auml;nderungshistorie</h2>
 <ul>
-<% @chunk.versions.sort_by {|obj| obj.index }.reverse.each do |v| %>
-  <li>Version <%= v.index %> (<%= v.originator %> am <%= v.created_at.strftime('%d.%m.%Y - %H:%M') %>)
-    <% if not v.next.nil? and v.index > 0 %>
+<% @chunk.versions.select{|obj| obj.index > 0}.sort_by {|obj| obj.index }.reverse.each do |v| %>
+  <li>Version <%= v.index %> (<%= User.find(v.originator).full_name %> am <%= v.created_at.strftime('%d.%m.%Y - %H:%M') %>)
+    <% if not v.next.nil? %>
     <%= link_to 'Unterschiede zeigen', book_chunk_diff_version_path(@book, @chunk, v, 'json'), remote: true, class: 'diff-link' %> |
     <%= link_to 'Wiederherstellen', book_chunk_revert_version_path(@book, @chunk, v), method: 'post' %>
     <% end %>
