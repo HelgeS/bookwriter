@@ -1,5 +1,5 @@
-<%= button_to 'Neues Buch anlegen', new_book_path, remote: true, method: 'get', format: 'js', class: 'btn btn-default' %>
-
+<%= button_to 'Neues Buch anlegen', new_book_path, remote: true, method: 'get', format: 'js', class: 'btn btn-default btn-sm' %>
+<br>
 <div id="books_tree" data-books-url="<%= books_path 'json' %>"
   <% if @book.nil? or @book.id.nil? %>
     data-url="<%= books_treeview_path 'json' %>" data-chunks-url="">

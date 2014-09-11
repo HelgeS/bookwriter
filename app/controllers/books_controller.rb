@@ -36,7 +36,7 @@ class BooksController < ApplicationController
         title: "#{b.title} (#{b.edition}. Edition)",
         key: b.id,
         folder: true,
-        href: edit_book_path(b),
+        href: book_path(b),
         base_url: book_path(b),
         expanded: (params[:book_id].to_i == b.id),
         children: children
