@@ -163,11 +163,11 @@ class BooksController < ApplicationController
       File.open(tmp_dir + "/text/#{filename}", 'w') { |file| file.write(c.content.html_safe) }
 
       c.get_images.each do |img|
-        source = Pathname.new(img)
+        source = Pathname.new('public' + img)
         target_path = tmp_dir + '/images/' + source.basename.to_s
 
         File.open(target_path, 'wb') do |target|
-          open(img) { |source_file| target.write(source_file.read) }
+          open(source.to_s) { |source_file| target.write(source_file.read) }
         end
       end
     end
