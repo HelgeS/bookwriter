@@ -138,7 +138,8 @@ class BooksController < ApplicationController
       format.json { head :no_content }
       format.pdf do
         render :pdf => "#{@book.title} (#{@book.edition}. Edition)",
-               :footer => { :right => 'Seite [page] von [topage]' }
+               :footer => { :right => 'Seite [page] von [topage]' },
+               :show_as_html => params[:debug].present?
       end
       format.epub do
         send_file export_ebook('epub'), :x_sendfile => true
