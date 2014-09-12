@@ -6,7 +6,7 @@ gem 'pg'
 
 gem 'devise' # Benutzermanagement
 gem 'paper_trail', '~> 2' # Wird von Paperclip (s.u.) benötigt
-gem 'paperclip', '~> 3.5.4' # Versionierung
+gem 'paperclip', '~> 4.2' # Anhänge
 gem 'ckeditor' # WYSIWYG-Editor
 #gem 'ckeditor_rails' # Integration in asset pipeline
 gem 'acts_as_list'
