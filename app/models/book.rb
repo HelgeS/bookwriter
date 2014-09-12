@@ -9,6 +9,7 @@ class Book < ActiveRecord::Base
     content = ''
 
     chunks.order('position ASC').each do |c|
+      content += "<h2>#{c.title}</h2>"
       content += c.content
     end
 
